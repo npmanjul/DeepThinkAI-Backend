@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.endpoints.auth import auth_router
 from app.api.v1.endpoints.blog import blog_router
+from app.api.v1.endpoints.test import test_router
 from app.core.database import engine
 from app.core.database import Base
 from sqlalchemy import inspect, text
@@ -44,11 +45,6 @@ app.add_middleware(
     allow_headers=["*"],  
 )
 
-@app.get("/api/v1")
-async def home():
-    return {
-        "message": "DeepThinkAI Backend is running successfully 🚀"
-    }
-
+app.include_router(test_router,prefix="/api/v1")
 app.include_router(auth_router,prefix="/api/v1")
 app.include_router(blog_router,prefix="/api/v1")

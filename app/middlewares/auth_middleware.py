@@ -10,7 +10,7 @@ class AuthMiddleware(BaseHTTPMiddleware):
 
         # Public routes
         public_routes = [
-        "/",
+        "/api/v1/test/",
         "/api/v1/auth/login",
         "/api/v1/auth/signup",
         "/api/v1/auth/google-auth",
