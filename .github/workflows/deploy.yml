@@ -21,4 +21,4 @@ jobs:
             cd /root/DeepThinkAI/DeepThinkAI-Backend
             git pull origin main
             cd ..
-            docker compose up -d --build backend
+            docker compose up -d --build deepthinkai-backend
