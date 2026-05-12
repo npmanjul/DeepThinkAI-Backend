@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy Backend
+      - name: Deploy Backend to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -19,6 +19,9 @@ jobs:
 
           script: |
             cd /root/DeepThinkAI/DeepThinkAI-Backend
+
             git pull origin main
-            cd ..
-            docker compose up -d --build deepthinkai-backend
+
+            cd /root/DeepThinkAI
+
+            docker compose up -d --build backend
