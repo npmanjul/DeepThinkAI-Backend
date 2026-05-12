@@ -44,7 +44,7 @@ app.add_middleware(
     allow_headers=["*"],  
 )
 
-@app.get("/api/v1/")
+@app.get("/api/v1")
 async def home():
     return {
         "message": "DeepThinkAI Backend is running successfully 🚀"
