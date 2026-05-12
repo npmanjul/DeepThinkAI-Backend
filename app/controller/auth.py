@@ -67,16 +67,13 @@ async def login(
         raise HTTPException(status_code=400,detail="Invalid credentials")
     
     access_token = create_access_token(data={"sub": user.id})
-    # Cookie security settings: use Secure+SameSite=None in production (HTTPS).
-    secure_cookie = os.getenv("ENV", "development") == "production"
-    samesite_policy = "none" if secure_cookie else "lax"
 
     response.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
-        secure=secure_cookie,
-        samesite=samesite_policy,
+        secure=True,
+        samesite="none",
         max_age=60 * 60,
         expires=60 * 60,
     )
@@ -111,16 +108,13 @@ async def google_auth(
         db.refresh(user)
 
     access_token = create_access_token(data={"sub": user.id})
-    
-    secure_cookie = os.getenv("ENV", "development") == "production"
-    samesite_policy = "none" if secure_cookie else "lax"
 
     response.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
-        secure=secure_cookie,
-        samesite=samesite_policy,
+        secure=True,
+        samesite="none",
         max_age=60 * 60,
         expires=60 * 60,
     )
@@ -201,15 +195,12 @@ async def verify_otp(
     user.is_verified = True
     access_token = create_access_token(data={"sub": user.id})
 
-    secure_cookie = os.getenv("ENV", "development") == "production"
-    samesite_policy = "none" if secure_cookie else "lax"
-
     response.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
-        secure=secure_cookie,
-        samesite=samesite_policy,
+        secure=True,
+        samesite="none",
         max_age=60 * 60,
         expires=60 * 60,
     )
