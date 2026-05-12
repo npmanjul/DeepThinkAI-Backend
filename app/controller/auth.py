@@ -74,6 +74,7 @@ async def login(
         httponly=True,
         secure=True,
         samesite="none",
+        domain=".anjul.cloud",
         max_age=60 * 60,
         expires=60 * 60,
     )
@@ -115,6 +116,7 @@ async def google_auth(
         httponly=True,
         secure=True,
         samesite="none",
+        domain=".anjul.cloud",
         max_age=60 * 60,
         expires=60 * 60,
     )
@@ -201,6 +203,7 @@ async def verify_otp(
         httponly=True,
         secure=True,
         samesite="none",
+        domain=".anjul.cloud",
         max_age=60 * 60,
         expires=60 * 60,
     )
@@ -234,14 +237,12 @@ async def reset_password(
 
 
 async def logout(response: Response):
-    secure_cookie = os.getenv("ENV", "development") == "production"
-    samesite_policy = "none" if secure_cookie else "lax"
 
     response.delete_cookie(
         key="access_token",
         httponly=True,
-        secure=secure_cookie,
-        samesite=samesite_policy,
+        secure=True,
+        samesite="none",
     )
 
     return {
