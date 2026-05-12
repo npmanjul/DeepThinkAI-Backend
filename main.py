@@ -33,6 +33,7 @@ origins = [
     "http://localhost:3000", 
     "http://127.0.0.1:3000",
     "http://88.222.242.223:3001",
+    "https://deepthinkai.anjul.cloud",
 ]
 
 app.add_middleware(
@@ -43,7 +44,7 @@ app.add_middleware(
     allow_headers=["*"],  
 )
 
-@app.get("/")
+@app.get("/api/v1/")
 async def home():
     return {
         "message": "DeepThinkAI Backend is running successfully 🚀"
